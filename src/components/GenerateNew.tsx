@@ -128,11 +128,11 @@ function GenerateNew() {
         specificCourses: [...allSingleCourses],
       });
 
-      if(newTimetable === false){
-        alert("There was an error generating the timetable. Try increasing the period or reducing the subjects");
-      }
-      else{
-
+      if (newTimetable === false) {
+        alert(
+          "There was an error generating the timetable. Try increasing the period or reducing the subjects"
+        );
+      } else {
         const fullTimetable: FullTimetableObject = {
           name: timetableData.name,
           startDate: timetableData.startDate,
@@ -140,18 +140,21 @@ function GenerateNew() {
           semester: timetableData.semester,
           timetable: newTimetable,
         };
-  
-        context?.setCurrentTimetable(fullTimetable);
-  
-        addDoc(collection(db, "timetable"), fullTimetable).then(() => {
-          alert("Successfully created Timetable");
-          navigate("/view-timetable");
-          setShowTimetable(true);
-        }).catch(() => {
-          alert("There was an error. Check your network settings and try again.")
-        })
-      }
 
+        context?.setCurrentTimetable(fullTimetable);
+
+        addDoc(collection(db, "timetable"), fullTimetable)
+          .then(() => {
+            alert("Successfully created Timetable");
+            navigate("/view-timetable");
+            setShowTimetable(true);
+          })
+          .catch(() => {
+            alert(
+              "There was an error. Check your network settings and try again."
+            );
+          });
+      }
     }
   }
 
@@ -262,6 +265,7 @@ function GenerateNew() {
                             departmentsOffering:
                               generalCourseData.departmentsOffering.filter(
                                 (data, indexno) => {
+                                  data;
                                   return indexno !== index;
                                 }
                               ),
@@ -307,6 +311,7 @@ function GenerateNew() {
             </div>
 
             {allGeneralCourses.map((generalCourse, index) => {
+              generalCourse;
               return (
                 <GeneralCourse
                   indexOf={index}
@@ -382,7 +387,10 @@ function GenerateNew() {
                           setSingleCourseData({
                             ...singleCourseData,
                             courses: singleCourseData.courses.filter(
-                              (oneCourse, indexNo) => indexNo !== index
+                              (oneCourse, indexNo) => {
+                                oneCourse;
+                                return indexNo !== index;
+                              }
                             ),
                           });
                         }}

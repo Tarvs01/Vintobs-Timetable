@@ -1,4 +1,3 @@
-import React from 'react'
 import { GeneralCourseComponentProps, GeneralCourseData } from '../types'
 
 function GeneralCourse({allGeneralCourses, indexOf, setGeneralCourseData} : GeneralCourseComponentProps) {
@@ -24,6 +23,7 @@ function GeneralCourse({allGeneralCourses, indexOf, setGeneralCourseData} : Gene
                                 departmentsOffering:
                                   allGeneralCourses[indexOf].departmentsOffering.filter(
                                     (data, indexno) => {
+                                      data;
                                       return indexno !== index;
                                     }
                                   ),}

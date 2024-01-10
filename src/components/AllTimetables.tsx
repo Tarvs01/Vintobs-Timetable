@@ -1,5 +1,5 @@
 import {useState, useEffect, useContext} from 'react'
-import { collection, query, onSnapshot, doc, updateDoc, deleteDoc } from 'firebase/firestore'
+import { collection, query, onSnapshot, doc, deleteDoc } from 'firebase/firestore'
 import { db } from '../utils/firebase';
 import { FullTimetableObject } from '../types';
 import TimetableCard from './TimetableCard';
@@ -17,7 +17,8 @@ function AllTimetables() {
   const unsub = onSnapshot(q, (querySnapshot) => {
     const tempAllTimetables: {id: string, timetable:FullTimetableObject}[] = [];
     querySnapshot.forEach((doc) => {
-      tempAllTimetables.push({ timetable: doc.data(), id: doc.id });
+      const data: FullTimetableObject = doc.data() as FullTimetableObject;
+      tempAllTimetables.push({ timetable: data, id: doc.id });
     });
     setAllTimetables(tempAllTimetables);
   });

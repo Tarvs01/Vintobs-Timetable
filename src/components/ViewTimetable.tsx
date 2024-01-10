@@ -6,6 +6,7 @@ function ViewTimetable({elementRef}: {elementRef?: React.RefObject<HTMLDivElemen
 
     console.log("current timetable is : ");
     console.log(context?.currentTimetable.timetable);
+
   return (
     <div className="timetable-viewer" style={{width: "100%", margin: "auto"}} ref={elementRef}>
       <div className="tt-head">
@@ -22,7 +23,7 @@ function ViewTimetable({elementRef}: {elementRef?: React.RefObject<HTMLDivElemen
           <th>Afternoon</th>
           <th>Evening</th>
         </tr>
-        {Object.keys(context!.currentTimetable.timetable).map((dayKey, index) => {
+        {Object.keys(context!.currentTimetable.timetable).sort((a,b) => (new Date(a).getTime()) - (new Date(b).getTime())).map((dayKey, index) => {
           return (
             <tr key={index} style={{fontSize: "10px"}}>
               <td>{dayKey}</td>
@@ -35,7 +36,10 @@ function ViewTimetable({elementRef}: {elementRef?: React.RefObject<HTMLDivElemen
                 <div key={index}>
                     <p className="hall">{(() => {
                       const totalStudents = context!.currentTimetable.timetable[dayKey].morning.population;
-                      if(totalStudents < 50){
+                      if(totalStudents <= 0){
+                        return "---"
+                      }
+                      else if(totalStudents < 50){
                         return "LT 2"
                       }
                       else if(totalStudents < 120){
@@ -61,8 +65,11 @@ function ViewTimetable({elementRef}: {elementRef?: React.RefObject<HTMLDivElemen
                 })}
                 <div key={index}>
                     <p className="hall">{(() => {
-                      const totalStudents = context!.currentTimetable.timetable[dayKey].morning.population;
-                      if(totalStudents < 50){
+                      const totalStudents = context!.currentTimetable.timetable[dayKey].afternoon.population;
+                      if(totalStudents <= 50){
+                        return "---";
+                      }
+                      else if(totalStudents < 50){
                         return "LT 2"
                       }
                       else if(totalStudents < 120){
@@ -88,8 +95,11 @@ function ViewTimetable({elementRef}: {elementRef?: React.RefObject<HTMLDivElemen
                 })}
                 <div key={index}>
                     <p className="hall">{(() => {
-                      const totalStudents = context!.currentTimetable.timetable[dayKey].morning.population;
-                      if(totalStudents < 50){
+                      const totalStudents = context!.currentTimetable.timetable[dayKey].evening.population;
+                      if(totalStudents <= 0){
+                        return "---"
+                      }
+                      else if(totalStudents < 50){
                         return "LT 2"
                       }
                       else if(totalStudents < 120){

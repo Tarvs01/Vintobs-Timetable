@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import {useContext} from 'react'
 import GenerateNew from './GenerateNew'
 import AllTimetables from './AllTimetables'
 import QuickTour from './QuickTour'
