@@ -227,8 +227,6 @@ export function generateTimetable(timetable : TimetableData) : TimetableObject |
       message: "The end date must be greater than or equal to the start date",
     };
   } */
-
-  //console.log(timetable);
   
   const endDate = new Date(timetable.endDate);
   let loop = new Date(timetable.startDate);
@@ -282,6 +280,7 @@ function addGeneralCourses(timetableObject: TimetableObject, generalCourses : Ge
 
 function addSpecificCourses(timetableObject : TimetableObject, specificCourses: SingleDepartmentCourses[]){
   const ttkeys = Object.keys(timetableObject);
+  let errorWithTimetable = false;
   specificCourses.map((levelCourses, index) => {
     let iteration = 1;
 
@@ -351,6 +350,7 @@ function addSpecificCourses(timetableObject : TimetableObject, specificCourses: 
           case 3:
           case 4:
           case 5:
+          case 6:
             {
               for(let i = 0; i < ttkeys.length; i++){
                 if(levelCourses.courses.length !== 0){
@@ -381,7 +381,8 @@ function addSpecificCourses(timetableObject : TimetableObject, specificCourses: 
             }
             break;
           default:
-            return false;
+            errorWithTimetable = true;
+            return;
         }
       }
     }
@@ -451,6 +452,7 @@ function addSpecificCourses(timetableObject : TimetableObject, specificCourses: 
           case 3:
           case 4:
           case 5:
+          case 6:
             {
               for(let i = 0; i < ttkeys.length; i++){
                 if(levelCourses.courses.length !== 0){
@@ -481,7 +483,8 @@ function addSpecificCourses(timetableObject : TimetableObject, specificCourses: 
             }
             break;
           default:
-            return false;
+            errorWithTimetable = true;
+            return;
         }
       }
     }
@@ -551,6 +554,7 @@ function addSpecificCourses(timetableObject : TimetableObject, specificCourses: 
           case 3:
           case 4:
           case 5:
+          case 6:
             {
               for(let i = 0; i < ttkeys.length; i++){
                 if(levelCourses.courses.length !== 0){
@@ -581,10 +585,16 @@ function addSpecificCourses(timetableObject : TimetableObject, specificCourses: 
             }
             break;
           default:
-            return false;
+            errorWithTimetable = true;
+            return;
         }
       }
     }
   })
-  return true
+  if(errorWithTimetable){
+    return false;
+  }
+  else{
+    return true;
+  }
 }

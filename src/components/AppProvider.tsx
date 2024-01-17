@@ -9,6 +9,8 @@ function AppProvider({ children }: PropsWithChildren) {
   const [currentTimetable, setCurrentTimetable] = useState<FullTimetableObject>(
     { name: "", startDate: "", endDate: "", semester: "", timetable: {} }
   );
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [UID, setUID] = useState("");
   return (
     <AppContext.Provider
       value={{
@@ -16,6 +18,10 @@ function AppProvider({ children }: PropsWithChildren) {
         setCurrentPage,
         currentTimetable,
         setCurrentTimetable,
+        isLoggedIn,
+        setIsLoggedIn,
+        UID,
+        setUID
       }}
     >
       {children}

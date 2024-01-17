@@ -3,6 +3,10 @@ export interface ContextItems {
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   currentTimetable: FullTimetableObject;
   setCurrentTimetable: React.Dispatch<React.SetStateAction<FullTimetableObject>>;
+  isLoggedIn: boolean;
+  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+  UID: string;
+  setUID: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export interface TimetableData {

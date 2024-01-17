@@ -98,10 +98,11 @@ function GenerateNew() {
     });
     setSingleCourse("");
     setNumberOfParticipants(0);
-    console.log(singleCourseData);
   }
 
   function addNewSingleCourse() {
+    console.log("single course data to use to set allSingleCourses:");
+    console.log(singleCourseData);
     setAllSingleCourses([...allSingleCourses, singleCourseData]);
     setSingleCourseData({ level: "100", department: "eee", courses: [] });
   }
@@ -122,11 +123,17 @@ function GenerateNew() {
     if (allSingleCourses.length === 0) {
       alert("Enter at least one specific course");
     } else {
+      console.log("all single courses are:");
+      console.log(allSingleCourses);
+
       const newTimetable: TimetableObject | false = generateTimetable({
         ...timetableData,
         generalCourses: [...allGeneralCourses],
         specificCourses: [...allSingleCourses],
       });
+
+      console.log("timetable generated");
+      console.log(newTimetable);
 
       if (newTimetable === false) {
         alert(
@@ -143,7 +150,7 @@ function GenerateNew() {
 
         context?.setCurrentTimetable(fullTimetable);
 
-        addDoc(collection(db, "timetable"), fullTimetable)
+        addDoc(collection(db, context!.UID), fullTimetable)
           .then(() => {
             alert("Successfully created Timetable");
             navigate("/view-timetable");

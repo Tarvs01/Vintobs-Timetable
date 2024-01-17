@@ -66,7 +66,7 @@ function ViewTimetable({elementRef}: {elementRef?: React.RefObject<HTMLDivElemen
                 <div key={index}>
                     <p className="hall">{(() => {
                       const totalStudents = context!.currentTimetable.timetable[dayKey].afternoon.population;
-                      if(totalStudents <= 50){
+                      if(totalStudents <= 0){
                         return "---";
                       }
                       else if(totalStudents < 50){

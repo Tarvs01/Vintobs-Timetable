@@ -672,3 +672,49 @@ body{
 .error h2{
   font-family: var(--open-sans-font);
 }
+
+.login-cont{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--purple-font);
+  background-image: url(../images/star1.png);
+}
+
+.login-cont form{
+  width: 400px;
+  height: 500px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.login-cont label{
+  font-family: var(--nunito-font);
+  font-size: 16px;
+  margin: 0 0 5px;
+  display: block;
+}
+
+.login-cont h1{
+  text-align: center;
+  margin: 20px 0 70px;
+  color: var(--purple-font);
+  font-family: var(--nunito-font);
+}
+
+.login-cont input{
+  margin-bottom: 15px;
+}
+
+.login-cont button{
+  display: block;
+  margin: 20px auto;
+  padding: 10px 30px;
+  background-color: rgba(72, 24, 232, .9);
+  color: white;
+  border: none;
+  font-family: var(--nunito-font);
+  border-radius: 6px;
+}
