@@ -24,6 +24,7 @@ function Login() {
     function handleSubmit(e: FormEvent){
         e.preventDefault();
         setIsLoading(true);
+        setErrorText("");
         signInWithEmailAndPassword(auth, userCredentials.email, userCredentials.password).then((userCredential) => {
           console.log(userCredential.user);
           context?.setIsLoggedIn(true);
@@ -32,6 +33,7 @@ function Login() {
           setIsLoading(false);
         }).catch((error) => {
           setIsLoading(false);
+          setErrorText("There was an error. Try again");
           console.log(error);
         })
     }
@@ -44,7 +46,10 @@ function Login() {
 
         <label htmlFor="password">Enter your password</label>
         <input type="password" name="password" id="password" value={userCredentials.password} onInput={handleInputChange} required/>
+
         {isLoading && <BounceLoader color='#4818e8' size={40} cssOverride={{margin: "0 auto"}} />}
+        <div className='error-text'>{errorText}</div>
+
         <button type="submit">Submit</button>
       </form>
     </div>

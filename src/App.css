@@ -718,3 +718,26 @@ body{
   font-family: var(--nunito-font);
   border-radius: 6px;
 }
+
+.error-text{
+  color: red;
+  font-family: var(--nunito-font);
+  text-align: center;
+}
+
+.sign-out{
+  background-color: var(--purple-font);
+  border: 2px solid var(--purple-font);
+  color: white;
+  font-family: var(--nunito-font);
+  padding: 10px 20px;
+  display: block;
+  margin: 250px auto 0;
+  border-radius: 50px;
+  transition: all linear 0.2s;
+}
+
+.sign-out:hover{
+  background-color: white;
+  color: var(--purple-font);
+}

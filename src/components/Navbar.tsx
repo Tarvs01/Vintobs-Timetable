@@ -1,8 +1,20 @@
 import {useContext} from 'react'
 import { AppContext } from './AppProvider'
+import { auth } from '../utils/firebase';
+import { signOut } from 'firebase/auth';
 
 function Navbar() {
   const context = useContext(AppContext);
+
+  function signOutUser(){
+    signOut(auth).then((response) => {
+      console.log(response);
+      context?.setIsLoggedIn(false);
+    }).catch((error) => {
+      console.log(error);
+      alert("an error occured signing out");
+    });
+  }
   return (
     <nav>
       <div className="logo-cont">
@@ -34,6 +46,8 @@ function Navbar() {
           <span>Quick Tour</span>
         </li>
       </ul>
+
+      <button className='sign-out' onClick={signOutUser}>Sign Out</button>
     </nav>
   )
 }
