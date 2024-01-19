@@ -45,8 +45,9 @@ function AllTimetables() {
   }
 
   function deleteTimetable(id: string) {
-    deleteDoc(doc(db, "timetable", id))
+    deleteDoc(doc(db, context!.UID, id))
       .then((resp) => {
+        console.log("delete successful");
         console.log(resp);
       })
       .catch((error) => {

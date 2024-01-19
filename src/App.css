@@ -243,6 +243,10 @@ input, select{
   margin-left: 10px;
 }
 
+.single-course-button{
+  margin-top: 0;
+}
+
 .general-course-cont{
   display: flex;
   flex-direction: row;
@@ -740,4 +744,11 @@ body{
 .sign-out:hover{
   background-color: white;
   color: var(--purple-font);
+}
+
+.error-para{
+  font-family: var(--nunito-font);
+  color: red;
+  text-align: center;
+  margin: 10px 0;
 }

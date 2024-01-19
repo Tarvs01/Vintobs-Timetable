@@ -40,6 +40,7 @@ function GenerateNew() {
     SingleDepartmentCourses[]
   >([]);
   const [showTimetable, setShowTimetable] = useState(false);
+  const [singleCourseError, setSingleCourseError] = useState("");
 
   function handleInputChange(e: ChangeEvent<HTMLInputElement>) {
     if (e.target.name === "exam-title") {
@@ -56,6 +57,7 @@ function GenerateNew() {
     } else if (e.target.name === "general-dept") {
       setGeneralDept(e.target.value);
     } else if (e.target.name === "single-course") {
+      setSingleCourseError("");
       setSingleCourse(e.target.value);
     } else if (e.target.name === "offering-students") {
       setNumberOfParticipants(Number(e.target.value));
@@ -89,15 +91,29 @@ function GenerateNew() {
   }
 
   function handleSingleCourseAdd() {
-    setSingleCourseData({
-      ...singleCourseData,
-      courses: [
-        ...singleCourseData.courses,
-        [singleCourse, numberOfParticipants],
-      ],
-    });
-    setSingleCourse("");
-    setNumberOfParticipants(0);
+    if(/^([a-z]{3}) (\d{3})$/.test(singleCourse)){
+      const courseCode = singleCourse.split(" ")[1];
+      const semesterIndicator = timetableData.semester == "first" ? 1 : 0;
+
+      if(Number(courseCode) % 2 === semesterIndicator){
+        setSingleCourseData({
+          ...singleCourseData,
+          courses: [
+            ...singleCourseData.courses,
+            [singleCourse, numberOfParticipants],
+          ],
+        });
+        setSingleCourse("");
+        setNumberOfParticipants(0);
+      }
+      else{
+        setSingleCourseError(`Invalid ${timetableData.semester} semester course code`);
+      }
+
+    }
+    else{
+      setSingleCourseError("Invalid course title format");
+    }
   }
 
   function addNewSingleCourse() {
@@ -365,9 +381,15 @@ function GenerateNew() {
                     onInput={handleSelectChange}
                     value={singleCourseData.department}
                   >
-                    <option value="eee">EEE</option>
+                    <option value="age">AGE</option>
                     <option value="cpe">CPE</option>
-                    <option value="ice">ICE</option>
+                    <option value="cve">CVE</option>
+                    <option value="eee">EEE</option>
+                    <option value="ict">ICT</option>
+                    <option value="ipe">IPE</option>
+                    <option value="mee">MEE</option>
+                    <option value="mme">MME</option>
+                    <option value="mne">MNE</option>
                   </select>
                 </div>
               </div>
@@ -443,6 +465,7 @@ function GenerateNew() {
                   onInput={handleInputChange}
                   placeholder="number of participants"
                 />
+                <p className="error-para">{singleCourseError}</p>
                 <div
                   onClick={handleSingleCourseAdd}
                   className="single-course-button"
