@@ -283,8 +283,271 @@ function addSpecificCourses(timetableObject : TimetableObject, specificCourses: 
   let errorWithTimetable = false;
   specificCourses.map((levelCourses, index) => {
     let iteration = 1;
+    index = Number(Number(Math.random() * 3).toFixed()); //yea, you might me wondering what I was smoking when writing this line. This wasn't here initially. The modulo of the index should have just been used. but that led to examination sets appearing at just one position. Like all modulo one sets will primarily be in the morning, modulo two primarily in the afternoon and modulo three in the evening. I later added this line to provide more randomness. It helped a bit but not much. The real randomness happens in the inner if statement.
 
-    if(index % 3 === 0){
+
+    while(levelCourses.courses.length !== 0){
+      switch(iteration){
+        case 1:
+          {
+            for(let i = 0; i < ttkeys.length; i += 2){
+              if(levelCourses.courses.length !== 0){
+                const decisionFactor = Math.random() * 3;
+
+                if(decisionFactor < 1){
+                  if(!timetableObject[ttkeys[i]].morning.departmentsOffering.includes(levelCourses.department)){
+                    timetableObject[ttkeys[i]].morning.courses[levelCourses.courses[levelCourses.courses.length - 1][0]] = levelCourses.courses[levelCourses.courses.length - 1][1];
+                    timetableObject[ttkeys[i]].morning.departmentsOffering.push(levelCourses.department);
+                    timetableObject[ttkeys[i]].morning.population += levelCourses.courses[levelCourses.courses.length - 1][1];
+                    levelCourses.courses.pop();
+                  }
+                  else if(!timetableObject[ttkeys[i]].afternoon.departmentsOffering.includes(levelCourses.department)){
+                    timetableObject[ttkeys[i]].afternoon.courses[levelCourses.courses[levelCourses.courses.length - 1][0]] = levelCourses.courses[levelCourses.courses.length - 1][1];
+                    timetableObject[ttkeys[i]].afternoon.departmentsOffering.push(levelCourses.department);
+                    timetableObject[ttkeys[i]].afternoon.population += levelCourses.courses[levelCourses.courses.length - 1][1];
+                    levelCourses.courses.pop();
+                  }
+                  else if(!timetableObject[ttkeys[i]].evening.departmentsOffering.includes(levelCourses.department)){
+                    timetableObject[ttkeys[i]].evening.courses[levelCourses.courses[levelCourses.courses.length - 1][0]] = levelCourses.courses[levelCourses.courses.length - 1][1];
+                    timetableObject[ttkeys[i]].evening.departmentsOffering.push(levelCourses.department);
+                    timetableObject[ttkeys[i]].evening.population += levelCourses.courses[levelCourses.courses.length - 1][1];
+                    levelCourses.courses.pop();
+                  }
+                  else{
+                    continue;
+                  }
+                }
+                else if(decisionFactor < 2){
+                  if(!timetableObject[ttkeys[i]].afternoon.departmentsOffering.includes(levelCourses.department)){
+                    timetableObject[ttkeys[i]].afternoon.courses[levelCourses.courses[levelCourses.courses.length - 1][0]] = levelCourses.courses[levelCourses.courses.length - 1][1];
+                    timetableObject[ttkeys[i]].afternoon.departmentsOffering.push(levelCourses.department);
+                    timetableObject[ttkeys[i]].afternoon.population += levelCourses.courses[levelCourses.courses.length - 1][1];
+                    levelCourses.courses.pop();
+                  }
+                  else if(!timetableObject[ttkeys[i]].evening.departmentsOffering.includes(levelCourses.department)){
+                    timetableObject[ttkeys[i]].evening.courses[levelCourses.courses[levelCourses.courses.length - 1][0]] = levelCourses.courses[levelCourses.courses.length - 1][1];
+                    timetableObject[ttkeys[i]].evening.departmentsOffering.push(levelCourses.department);
+                    timetableObject[ttkeys[i]].evening.population += levelCourses.courses[levelCourses.courses.length - 1][1];
+                    levelCourses.courses.pop();
+                  }
+                  else if(!timetableObject[ttkeys[i]].morning.departmentsOffering.includes(levelCourses.department)){
+                    timetableObject[ttkeys[i]].morning.courses[levelCourses.courses[levelCourses.courses.length - 1][0]] = levelCourses.courses[levelCourses.courses.length - 1][1];
+                    timetableObject[ttkeys[i]].morning.departmentsOffering.push(levelCourses.department);
+                    timetableObject[ttkeys[i]].morning.population += levelCourses.courses[levelCourses.courses.length - 1][1];
+                    levelCourses.courses.pop();
+                  }
+                  else{
+                    continue;
+                  }
+                }
+                else{
+                  if(!timetableObject[ttkeys[i]].evening.departmentsOffering.includes(levelCourses.department)){
+                    timetableObject[ttkeys[i]].evening.courses[levelCourses.courses[levelCourses.courses.length - 1][0]] = levelCourses.courses[levelCourses.courses.length - 1][1];
+                    timetableObject[ttkeys[i]].evening.departmentsOffering.push(levelCourses.department);
+                    timetableObject[ttkeys[i]].evening.population += levelCourses.courses[levelCourses.courses.length - 1][1];
+                    levelCourses.courses.pop();
+                  }
+                  else if(!timetableObject[ttkeys[i]].morning.departmentsOffering.includes(levelCourses.department)){
+                    timetableObject[ttkeys[i]].morning.courses[levelCourses.courses[levelCourses.courses.length - 1][0]] = levelCourses.courses[levelCourses.courses.length - 1][1];
+                    timetableObject[ttkeys[i]].morning.departmentsOffering.push(levelCourses.department);
+                    timetableObject[ttkeys[i]].morning.population += levelCourses.courses[levelCourses.courses.length - 1][1];
+                    levelCourses.courses.pop();
+                  }
+                  else if(!timetableObject[ttkeys[i]].afternoon.departmentsOffering.includes(levelCourses.department)){
+                    timetableObject[ttkeys[i]].afternoon.courses[levelCourses.courses[levelCourses.courses.length - 1][0]] = levelCourses.courses[levelCourses.courses.length - 1][1];
+                    timetableObject[ttkeys[i]].afternoon.departmentsOffering.push(levelCourses.department);
+                    timetableObject[ttkeys[i]].afternoon.population += levelCourses.courses[levelCourses.courses.length - 1][1];
+                    levelCourses.courses.pop();
+                  }
+                  else{
+                    continue;
+                  }
+                }
+
+              }
+            }
+            iteration++;
+          }
+          break;
+        case 2:
+          {
+            for(let i = 1; i < ttkeys.length; i += 2){
+              if(levelCourses.courses.length !== 0){
+                const decisionFactor = Math.random() * 3;
+
+                if(decisionFactor < 1){
+                  if(!timetableObject[ttkeys[i]].morning.departmentsOffering.includes(levelCourses.department)){
+                    timetableObject[ttkeys[i]].morning.courses[levelCourses.courses[levelCourses.courses.length - 1][0]] = levelCourses.courses[levelCourses.courses.length - 1][1];
+                    timetableObject[ttkeys[i]].morning.departmentsOffering.push(levelCourses.department);
+                    timetableObject[ttkeys[i]].morning.population += levelCourses.courses[levelCourses.courses.length - 1][1];
+                    levelCourses.courses.pop();
+                  }
+                  else if(!timetableObject[ttkeys[i]].afternoon.departmentsOffering.includes(levelCourses.department)){
+                    timetableObject[ttkeys[i]].afternoon.courses[levelCourses.courses[levelCourses.courses.length - 1][0]] = levelCourses.courses[levelCourses.courses.length - 1][1];
+                    timetableObject[ttkeys[i]].afternoon.departmentsOffering.push(levelCourses.department);
+                    timetableObject[ttkeys[i]].afternoon.population += levelCourses.courses[levelCourses.courses.length - 1][1];
+                    levelCourses.courses.pop();
+                  }
+                  else if(!timetableObject[ttkeys[i]].evening.departmentsOffering.includes(levelCourses.department)){
+                    timetableObject[ttkeys[i]].evening.courses[levelCourses.courses[levelCourses.courses.length - 1][0]] = levelCourses.courses[levelCourses.courses.length - 1][1];
+                    timetableObject[ttkeys[i]].evening.departmentsOffering.push(levelCourses.department);
+                    timetableObject[ttkeys[i]].evening.population += levelCourses.courses[levelCourses.courses.length - 1][1];
+                    levelCourses.courses.pop();
+                  }
+                  else{
+                    continue;
+                  }
+                }
+                else if(decisionFactor < 2){
+                  if(!timetableObject[ttkeys[i]].afternoon.departmentsOffering.includes(levelCourses.department)){
+                    timetableObject[ttkeys[i]].afternoon.courses[levelCourses.courses[levelCourses.courses.length - 1][0]] = levelCourses.courses[levelCourses.courses.length - 1][1];
+                    timetableObject[ttkeys[i]].afternoon.departmentsOffering.push(levelCourses.department);
+                    timetableObject[ttkeys[i]].afternoon.population += levelCourses.courses[levelCourses.courses.length - 1][1];
+                    levelCourses.courses.pop();
+                  }
+                  else if(!timetableObject[ttkeys[i]].evening.departmentsOffering.includes(levelCourses.department)){
+                    timetableObject[ttkeys[i]].evening.courses[levelCourses.courses[levelCourses.courses.length - 1][0]] = levelCourses.courses[levelCourses.courses.length - 1][1];
+                    timetableObject[ttkeys[i]].evening.departmentsOffering.push(levelCourses.department);
+                    timetableObject[ttkeys[i]].evening.population += levelCourses.courses[levelCourses.courses.length - 1][1];
+                    levelCourses.courses.pop();
+                  }
+                  else if(!timetableObject[ttkeys[i]].morning.departmentsOffering.includes(levelCourses.department)){
+                    timetableObject[ttkeys[i]].morning.courses[levelCourses.courses[levelCourses.courses.length - 1][0]] = levelCourses.courses[levelCourses.courses.length - 1][1];
+                    timetableObject[ttkeys[i]].morning.departmentsOffering.push(levelCourses.department);
+                    timetableObject[ttkeys[i]].morning.population += levelCourses.courses[levelCourses.courses.length - 1][1];
+                    levelCourses.courses.pop();
+                  }
+                  else{
+                    continue;
+                  }
+                }
+                else{
+                  if(!timetableObject[ttkeys[i]].evening.departmentsOffering.includes(levelCourses.department)){
+                    timetableObject[ttkeys[i]].evening.courses[levelCourses.courses[levelCourses.courses.length - 1][0]] = levelCourses.courses[levelCourses.courses.length - 1][1];
+                    timetableObject[ttkeys[i]].evening.departmentsOffering.push(levelCourses.department);
+                    timetableObject[ttkeys[i]].evening.population += levelCourses.courses[levelCourses.courses.length - 1][1];
+                    levelCourses.courses.pop();
+                  }
+                  else if(!timetableObject[ttkeys[i]].morning.departmentsOffering.includes(levelCourses.department)){
+                    timetableObject[ttkeys[i]].morning.courses[levelCourses.courses[levelCourses.courses.length - 1][0]] = levelCourses.courses[levelCourses.courses.length - 1][1];
+                    timetableObject[ttkeys[i]].morning.departmentsOffering.push(levelCourses.department);
+                    timetableObject[ttkeys[i]].morning.population += levelCourses.courses[levelCourses.courses.length - 1][1];
+                    levelCourses.courses.pop();
+                  }
+                  else if(!timetableObject[ttkeys[i]].afternoon.departmentsOffering.includes(levelCourses.department)){
+                    timetableObject[ttkeys[i]].afternoon.courses[levelCourses.courses[levelCourses.courses.length - 1][0]] = levelCourses.courses[levelCourses.courses.length - 1][1];
+                    timetableObject[ttkeys[i]].afternoon.departmentsOffering.push(levelCourses.department);
+                    timetableObject[ttkeys[i]].afternoon.population += levelCourses.courses[levelCourses.courses.length - 1][1];
+                    levelCourses.courses.pop();
+                  }
+                  else{
+                    continue;
+                  }
+                }
+              }
+            }
+            iteration++;
+          }
+          break;
+        case 3:
+        case 4:
+        case 5:
+        case 6:
+          {
+            for(let i = 0; i < ttkeys.length; i++){
+              if(levelCourses.courses.length !== 0){
+                const decisionFactor = Math.random() * 3;
+
+                if(decisionFactor < 1){
+                  if(!timetableObject[ttkeys[i]].morning.departmentsOffering.includes(levelCourses.department)){
+                    timetableObject[ttkeys[i]].morning.courses[levelCourses.courses[levelCourses.courses.length - 1][0]] = levelCourses.courses[levelCourses.courses.length - 1][1];
+                    timetableObject[ttkeys[i]].morning.departmentsOffering.push(levelCourses.department);
+                    timetableObject[ttkeys[i]].morning.population += levelCourses.courses[levelCourses.courses.length - 1][1];
+                    levelCourses.courses.pop();
+                  }
+                  else if(!timetableObject[ttkeys[i]].afternoon.departmentsOffering.includes(levelCourses.department)){
+                    timetableObject[ttkeys[i]].afternoon.courses[levelCourses.courses[levelCourses.courses.length - 1][0]] = levelCourses.courses[levelCourses.courses.length - 1][1];
+                    timetableObject[ttkeys[i]].afternoon.departmentsOffering.push(levelCourses.department);
+                    timetableObject[ttkeys[i]].afternoon.population += levelCourses.courses[levelCourses.courses.length - 1][1];
+                    levelCourses.courses.pop();
+                  }
+                  else if(!timetableObject[ttkeys[i]].evening.departmentsOffering.includes(levelCourses.department)){
+                    timetableObject[ttkeys[i]].evening.courses[levelCourses.courses[levelCourses.courses.length - 1][0]] = levelCourses.courses[levelCourses.courses.length - 1][1];
+                    timetableObject[ttkeys[i]].evening.departmentsOffering.push(levelCourses.department);
+                    timetableObject[ttkeys[i]].evening.population += levelCourses.courses[levelCourses.courses.length - 1][1];
+                    levelCourses.courses.pop();
+                  }
+                  else{
+                    continue;
+                  }
+                }
+                else if(decisionFactor < 2){
+                  if(!timetableObject[ttkeys[i]].afternoon.departmentsOffering.includes(levelCourses.department)){
+                    timetableObject[ttkeys[i]].afternoon.courses[levelCourses.courses[levelCourses.courses.length - 1][0]] = levelCourses.courses[levelCourses.courses.length - 1][1];
+                    timetableObject[ttkeys[i]].afternoon.departmentsOffering.push(levelCourses.department);
+                    timetableObject[ttkeys[i]].afternoon.population += levelCourses.courses[levelCourses.courses.length - 1][1];
+                    levelCourses.courses.pop();
+                  }
+                  else if(!timetableObject[ttkeys[i]].evening.departmentsOffering.includes(levelCourses.department)){
+                    timetableObject[ttkeys[i]].evening.courses[levelCourses.courses[levelCourses.courses.length - 1][0]] = levelCourses.courses[levelCourses.courses.length - 1][1];
+                    timetableObject[ttkeys[i]].evening.departmentsOffering.push(levelCourses.department);
+                    timetableObject[ttkeys[i]].evening.population += levelCourses.courses[levelCourses.courses.length - 1][1];
+                    levelCourses.courses.pop();
+                  }
+                  else if(!timetableObject[ttkeys[i]].morning.departmentsOffering.includes(levelCourses.department)){
+                    timetableObject[ttkeys[i]].morning.courses[levelCourses.courses[levelCourses.courses.length - 1][0]] = levelCourses.courses[levelCourses.courses.length - 1][1];
+                    timetableObject[ttkeys[i]].morning.departmentsOffering.push(levelCourses.department);
+                    timetableObject[ttkeys[i]].morning.population += levelCourses.courses[levelCourses.courses.length - 1][1];
+                    levelCourses.courses.pop();
+                  }
+                  else{
+                    continue;
+                  }
+                }
+                else{
+                  if(!timetableObject[ttkeys[i]].evening.departmentsOffering.includes(levelCourses.department)){
+                    timetableObject[ttkeys[i]].evening.courses[levelCourses.courses[levelCourses.courses.length - 1][0]] = levelCourses.courses[levelCourses.courses.length - 1][1];
+                    timetableObject[ttkeys[i]].evening.departmentsOffering.push(levelCourses.department);
+                    timetableObject[ttkeys[i]].evening.population += levelCourses.courses[levelCourses.courses.length - 1][1];
+                    levelCourses.courses.pop();
+                  }
+                  else if(!timetableObject[ttkeys[i]].morning.departmentsOffering.includes(levelCourses.department)){
+                    timetableObject[ttkeys[i]].morning.courses[levelCourses.courses[levelCourses.courses.length - 1][0]] = levelCourses.courses[levelCourses.courses.length - 1][1];
+                    timetableObject[ttkeys[i]].morning.departmentsOffering.push(levelCourses.department);
+                    timetableObject[ttkeys[i]].morning.population += levelCourses.courses[levelCourses.courses.length - 1][1];
+                    levelCourses.courses.pop();
+                  }
+                  else if(!timetableObject[ttkeys[i]].afternoon.departmentsOffering.includes(levelCourses.department)){
+                    timetableObject[ttkeys[i]].afternoon.courses[levelCourses.courses[levelCourses.courses.length - 1][0]] = levelCourses.courses[levelCourses.courses.length - 1][1];
+                    timetableObject[ttkeys[i]].afternoon.departmentsOffering.push(levelCourses.department);
+                    timetableObject[ttkeys[i]].afternoon.population += levelCourses.courses[levelCourses.courses.length - 1][1];
+                    levelCourses.courses.pop();
+                  }
+                  else{
+                    continue;
+                  }
+                }
+              }
+            }
+            iteration++;
+          }
+          break;
+        default:
+          errorWithTimetable = true;
+          return;
+      }
+    }
+
+
+
+
+
+
+
+
+
+
+    /* if(index % 3 === 0){
       while(levelCourses.courses.length !== 0){
         switch(iteration){
           case 1:
@@ -589,7 +852,7 @@ function addSpecificCourses(timetableObject : TimetableObject, specificCourses: 
             return;
         }
       }
-    }
+    } */
   })
   if(errorWithTimetable){
     return false;
