@@ -60,6 +60,13 @@ function GenerateNew() {
       setSingleCourseError("");
       setSingleCourse(e.target.value);
     } else if (e.target.name === "offering-students") {
+      const tempStudents = e.target.value.replace(/\D/, "");
+      if(isNaN(Number(tempStudents))){
+        setNumberOfParticipants(0);
+      }
+      else{
+        setNumberOfParticipants(Number(tempStudents));
+      }
       setNumberOfParticipants(Number(e.target.value));
     } else if (e.target.name === "general-participants") {
       setGeneralCourseData({
@@ -91,7 +98,7 @@ function GenerateNew() {
   }
 
   function handleSingleCourseAdd() {
-    if(/^([a-z]{3}) (\d{3})$/.test(singleCourse)){
+    if(/^([a-z]{3}) (\d{3})$/.test(singleCourse.toLowerCase())){
       const courseCode = singleCourse.split(" ")[1];
       const semesterIndicator = timetableData.semester == "first" ? 1 : 0;
 
@@ -458,7 +465,7 @@ function GenerateNew() {
 
                 <label htmlFor="offering-students">Number of students</label>
                 <input
-                  type="number"
+                  type="text"
                   name="offering-students"
                   id="offering-students"
                   value={numberOfParticipants}
